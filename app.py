@@ -45,7 +45,7 @@ st.dataframe(df.head())
 st.subheader("Bar Chart: Violations by Type")
 
 fig1, ax1 = plt.subplots(figsize=(8, 4))
-sns.countplot(data=df, x="Violation Type", palette="viridis", ax=ax1)
+sns.countplot(data=filtered_df, x="Violation Type", palette="viridis", ax=ax1)
 ax1.set_title("Number of Violations by Type")
 ax1.tick_params(axis='x', rotation=45)
 
@@ -55,7 +55,7 @@ st.markdown("**Interpretation:** Speeding appears as the most frequent violation
 
 st.subheader("Pie Chart: Payment Status")
 
-payment_counts = df["Payment Status"].value_counts()
+payment_counts = filtered_df["Payment Status"].value_counts()
 
 fig2, ax2 = plt.subplots(figsize=(4, 4))
 ax2.pie(payment_counts, labels=payment_counts.index, autopct="%1.1f%%", colors=["#4CAF50", "#FF5252"])
@@ -67,7 +67,7 @@ st.markdown("**Interpretation:** A high proportion of unpaid fines may indicate 
 
 st.subheader("Trend Analysis: Violations by Month")
 
-monthly_counts = df.groupby("Violation Month").size()
+monthly_counts = filtered_df.groupby("Violation Month").size()
 
 fig3, ax3 = plt.subplots(figsize=(8, 4))
 monthly_counts.plot(kind="line", marker="o", ax=ax3, color="blue")
