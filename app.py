@@ -9,6 +9,35 @@ csv_url = sheet_url.replace("/edit#gid=", "/export?format=csv&gid=")
 
 df = pd.read_csv(csv_url)
 
+# Sidebar Filters
+st.sidebar.header("Filters")
+
+violation_filter = st.sidebar.multiselect(
+    "Select Violation Type:",
+    options=df["Violation Type"].unique(),
+    default=df["Violation Type"].unique()
+)
+
+payment_filter = st.sidebar.multiselect(
+    "Select Payment Status:",
+    options=df["Payment Status"].unique(),
+    default=df["Payment Status"].unique()
+)
+
+month_filter = st.sidebar.multiselect(
+    "Select Month:",
+    options=sorted(df["Violation Month"].unique()),
+    default=sorted(df["Violation Month"].unique())
+)
+
+# Apply filters
+filtered_df = df[
+    (df["Violation Type"].isin(violation_filter)) &
+    (df["Payment Status"].isin(payment_filter)) &
+    (df["Violation Month"].isin(month_filter))
+]
+
+
 st.subheader("Sample Data")
 st.dataframe(df.head())
 
