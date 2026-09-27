@@ -3,11 +3,12 @@ import pandas as pd
 
 st.title("VIC Traffic Violations Dashboard")
 
-# Load data from Google Sheets
-sheet_url = "https://drive.google.com/file/d/10kd48Lkcg-FCG7OFHRBhbrjOJcy4KPCz/view?usp=drive_link"
-csv_url = sheet_url.replace("/edit#gid=", "/export?format=csv&gid=")
+# Load data
+file_id = "10kd48Lkcg-FCG7OFHRBhbrjOJcy4KPCz"
+csv_url = f"https://drive.google.com/uc?export=download&id={file_id}"
 
 df = pd.read_csv(csv_url)
+
 
 # Sidebar Filters
 st.sidebar.header("Filters")
